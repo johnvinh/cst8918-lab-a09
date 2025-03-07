@@ -13,7 +13,7 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "resource_group"
+resource "azurerm_resource_group" "resource_group" {
   name     = "cst8918-lab-a09"
   location = "Canada Central"
 }
