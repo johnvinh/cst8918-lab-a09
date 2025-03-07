@@ -28,18 +28,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.2.4
-      - name: Validate terraform fmt (added_modified)
-        run: |
-          CHECK_STATUS=0
-
-          for changed_file in ${{ steps.pr_files.outputs.added_modified }}; do
-            echo "Checking terraform fmt on ${changed_file}..."
-
-            if [[ $changed_file == *.tf ]]; then
-              if ! terraform fmt -check "$changed_file"; then
-                echo "❌ terraform fmt failed - ${changed_file}" >> $GITHUB_STEP_SUMMARY
-                CHECK_STATUS=1
-              fi
-            fi
-          done
-          exit $CHECK_STATUS
+      - name: terraform fmt
+        uses: dflook/terraform-fmt-check@v1
+        with:
+          path: infrastructure
